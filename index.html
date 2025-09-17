@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bank Management System</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+   /* 🔹 Apply background image only for header+nav */
+.header-nav {
+  background-image: url("bank.jpg"); /* change path as per your folder */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-bottom: 20px; /* space below nav so bg is visible */
+}
+
+/* Make header text readable */
+header {
+  background: rgba(0, 123, 255, 0.7); /* transparent overlay */
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin: 0;
+}
+
+/* Style for nav */
+nav {
+  background: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding: 10px;
+}
+
+nav button {
+  margin: 5px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+nav button:hover {
+  background: #0056b3;
+}
+
+/* Sections with plain white background */
+main {
+  background: white;
+  padding: 20px;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bank Management System</h1>
+  </header>
+
+  <nav>
+    <button onclick="showSection('customers')">Customers</button>
+    <button onclick="showSection('accounts')">Accounts</button>
+    <button onclick="showSection('transactions')">Transactions</button>
+  </nav>
+
+  <main>
+    <!-- Customers Section -->
+    <section id="customers" class="hidden">
+      <h2>Customers</h2>
+      <form id="customerForm">
+        <input type="text" id="custName" placeholder="Name" required>
+        <input type="email" id="custEmail" placeholder="Email" required>
+        <input type="text" id="custPhone" placeholder="Phone">
+        <button type="submit">Add Customer</button>
+      </form>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th></tr>
+        </thead>
+        <tbody id="customerTable"></tbody>
+      </table>
+    </section>
+
+    <!-- Accounts Section -->
+    <section id="accounts" class="hidden">
+      <h2>Accounts</h2>
+      <form id="accountForm">
+        <input type="number" id="accCustomerId" placeholder="Customer ID" required>
+        <input type="text" id="accNumber" placeholder="Account Number" required>
+        <select id="accType">
+          <option value="SAVINGS">SAVINGS</option>
+          <option value="CURRENT">CURRENT</option>
+        </select>
+        <input type="number" id="accDeposit" placeholder="Initial Deposit" value="0">
+        <button type="submit">Create Account</button>
+      </form>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Acc No</th><th>Type</th><th>Balance</th><th>Customer</th></tr>
+        </thead>
+        <tbody id="accountTable"></tbody>
+      </table>
+
+      <h3>Deposit / Withdraw</h3>
+      <form id="transactionForm">
+        <input type="number" id="txnAccountId" placeholder="Account ID" required>
+        <input type="number" id="txnAmount" placeholder="Amount" required>
+        <select id="txnType">
+          <option value="deposit">Deposit</option>
+          <option value="withdraw">Withdraw</option>
+        </select>
+        <input type="text" id="txnDesc" placeholder="Description">
+        <button type="submit">Submit</button>
+      </form>
+
+      <h3>Transfer</h3>
+      <form id="transferForm">
+        <input type="number" id="fromAcc" placeholder="From Account ID" required>
+        <input type="number" id="toAcc" placeholder="To Account ID" required>
+        <input type="number" id="transferAmt" placeholder="Amount" required>
+        <input type="text" id="transferDesc" placeholder="Description">
+        <button type="submit">Transfer</button>
+      </form>
+    </section>
+
+    <!-- Transactions Section -->
+    <section id="transactions" class="hidden">
+      <h2>Transactions</h2>
+      <input type="number" id="txnAccId" placeholder="Enter Account ID">
+      <button onclick="loadTransactions()">Load Transactions</button>
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Type</th><th>Amount</th><th>Timestamp</th><th>Description</th></tr>
+        </thead>
+        <tbody id="transactionTable"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="bank.js"></script>
+</body>
+</html>
